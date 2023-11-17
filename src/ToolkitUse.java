@@ -1,23 +1,23 @@
 import java.util.logging.Logger;
 
 public class ToolkitUse {
-    //j'ai pas le temps d'apprendre à utiliser les logger donc on va se contenter d'un S.out...
+    private static final Logger logger = Logger.getLogger("logger");
     public static void main(String[] args){
+
         ToolKit toolKit = new ToolKit();
 
-        System.out.println("\nTest de la fonction getSomeLevelsWhichOtherNameContainingAA :");
-        toolKit.getSomeLevelsWhichOtherNameContainingAA().forEach(System.out::println);
-
-        System.out.println("\nTest de la fonction getLevelScoreAverage :");
-        System.out.println(toolKit.getLevelScoreAverage());
-
-        System.out.println("\nTest de la fonction getSomeToolNames :");
-        toolKit.getSomeToolNames('e').forEach(System.out::println);
-
-        System.out.println("\nTest de la fonction getSomeToolsByWord :");
-        toolKit.getSomeToolsByWord("faciliter").forEach(System.out::println);
-
-        System.out.println("\nTest de la fonction getDomainListOrderedByNumberOfGoodPractices :");
-        System.out.println(toolKit.getDomainListOrderedByNumberOfGoodPractices()); //le tri ne fonctionne pas, mais il est 17h. Je n'ai pas le temps d'aller plus loin...
+        logger.info("\nTest de la fonction getSomeLevelsWhichOtherNameContainingAA :\n"+toolKit.getSomeLevelsWhichOtherNameContainingAA()+"\n");
+        logger.info("\nTest de la fonction getLevelScoreAverage :\n"+toolKit.getLevelScoreAverage()+"\n");
+        logger.info("\nTest de la fonction getSomeToolNames :\n"+toolKit.getSomeToolNames('e')+"\n");
+        logger.info("\nTest de la fonction getSomeToolsByWord :\n"+toolKit.getSomeToolsByWord("faciliter")+"\n");
+        logger.info("\nTest de la fonction getDomainListOrderedByNumberOfGoodPractices :\n"+toolKit.getDomainListOrderedByNumberOfGoodPractices()+"\n");
+        logger.info("\nTest de la fonction getNumberOfGoodPracticies :\n"+toolKit.getNumberOfGoodPractices()+"\n");
+        logger.info("\nTest de la fonction getGoodPracticesByDomain :\n"+toolKit.getGoodPracticesByDomain("Spécification")+"\n");
+        logger.info("\nTest de la fonction calculateGoodPracticeNumberOfLettersAverage :\n"+toolKit.calculateGoodPracticeNumberOfLettersAverage()+"\n");
+        logger.info("\nTest de la fonction getGoodPracticesByWord :\n"+toolKit.getGoodPracticesByWord("retenir")+"\n");
+        logger.info("\nTest de la fonction getAllGoodPractices :\n"+toolKit.getAllGoodPractices()+"\n");
+        logger.info("\nTest de la fonction getNumberOfGoodPracticesByLetter :\n"+toolKit.getNumberOfGoodPracticesByLetter('u')+"\n");
+        logger.info("\nTest de la fonction  : getStringGoodPracticesByDomain\n"+toolKit.getStringGoodPracticesByDomain("Spécification")+"\n");
+        logger.info("\nTest de la fonction  : getRandomGoodPractice\n"+toolKit.getRandomGoodPractice()+"\n");
     }
 }

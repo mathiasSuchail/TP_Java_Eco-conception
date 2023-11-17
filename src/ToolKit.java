@@ -6,14 +6,15 @@ public class ToolKit {
     private Map<String, MaturityLevel> levels;
     private List<GoodPractice> goodPractices;
     private List<NbOfGpPerDomain> nbOfGpPerDomains;
-    private Random r;
     private List<Tool> tools;
+    private Random r;
 
     public ToolKit() {
         initTools();
         initGoodPractices();
         initLevels();
         initNbOfGpPerDomains();
+        r=new Random();
     }
 
     private void initTools(){
@@ -99,9 +100,8 @@ public class ToolKit {
         for (MaturityLevel maturityLevel : levels.values()) {
             sum += maturityLevel.getScore();
         }
-        int avg=(sum/levels.size());
-        if(sum%levels.size()>levels.size()/2) avg++;
-        return String.valueOf(avg)+"%";
+        double avg=(double) sum/levels.size();
+        return Math.round(avg * 100) / 100.0 + "%";
     }
     public List<Tool> getSomeToolNames(char firstLetter){
         List<Tool> result = new ArrayList<>();
@@ -126,4 +126,33 @@ public class ToolKit {
         result = nbOfGpPerDomains.stream().sorted((domain, nbOfGpPerDomain)->domain.getNbOfGp()).map(NbOfGpPerDomain::getDomain).toList();
         return result;
     }
+    public int getNumberOfGoodPractices(){
+        return goodPractices.size();
+    }
+    public List<GoodPractice> getGoodPracticesByDomain(String domain){
+        return goodPractices.stream().filter(e->e.getField().toLowerCase().contains(domain.toLowerCase())).toList();
+    }
+    public double calculateGoodPracticeNumberOfLettersAverage(){
+        return (double) Math.round(goodPractices.stream()
+                .mapToDouble(e -> e.getName().length())
+                .average()
+                .orElse(0.0)*100)/100;
+    }
+    public List<GoodPractice> getGoodPracticesByWord(String word){
+        return goodPractices.stream().filter(e -> e.getName().toLowerCase().contains(word.toLowerCase())).toList();
+    }
+
+    public List<String> getAllGoodPractices(){
+        return goodPractices.stream().map(GoodPractice::getName).toList();
+    }
+    public int getNumberOfGoodPracticesByLetter(char letter){
+        return (int) goodPractices.stream().filter(e->Character.toLowerCase(e.getName().toCharArray()[0]) ==Character.toLowerCase(letter)).count();
+    }
+    public String getStringGoodPracticesByDomain(String domain){
+        return getGoodPracticesByDomain(domain).stream().map(GoodPractice::toString).collect(Collectors.joining("|"));
+    }
+    public String getRandomGoodPractice(){
+        return goodPractices.get(r.nextInt(goodPractices.size())).toString();
+    }
+
 }
